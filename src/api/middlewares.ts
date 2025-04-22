@@ -36,5 +36,9 @@ export default defineMiddlewares({
                 validateAndTransformBody(PatchAdminUpdateStoreInfo),
             ],
         },
+        {
+            matcher: "/store/store-info",
+            method: "GET"
+        },
     ],
 })
