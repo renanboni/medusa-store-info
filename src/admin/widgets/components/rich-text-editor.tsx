@@ -26,6 +26,7 @@ import {
 } from "lucide-react"
 import { Button, clx, Input, Label, Popover } from "@medusajs/ui"
 import { Separator } from "../../components/separator"
+import EditorButton from "./editor-button"
 
 export default function RichTextEditor() {
     const [linkUrl, setLinkUrl] = useState("")
@@ -80,7 +81,7 @@ export default function RichTextEditor() {
     return (
         <div className="border rounded-lg shadow-sm bg-background">
             <div className="flex flex-wrap items-center gap-1 p-2 border-b">
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="base"
                     onClick={() => editor.chain().focus().toggleBold().run()}
@@ -88,9 +89,9 @@ export default function RichTextEditor() {
                 >
                     <Bold className="w-4 h-4" />
                     <span className="sr-only">Bold</span>
-                </Button>
+                </EditorButton>
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
                     onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -98,9 +99,9 @@ export default function RichTextEditor() {
                 >
                     <Italic className="w-4 h-4" />
                     <span className="sr-only">Italic</span>
-                </Button>
+                </EditorButton>
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
                     onClick={() => editor.chain().focus().toggleStrike().run()}
@@ -108,11 +109,11 @@ export default function RichTextEditor() {
                 >
                     <Strikethrough className="w-4 h-4" />
                     <span className="sr-only">Strikethrough</span>
-                </Button>
+                </EditorButton>
 
                 <Separator orientation="vertical" className="h-6" />
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
                     onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -120,9 +121,9 @@ export default function RichTextEditor() {
                 >
                     <Heading1 className="w-4 h-4" />
                     <span className="sr-only">Heading 1</span>
-                </Button>
+                </EditorButton>
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
                     onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
@@ -130,9 +131,9 @@ export default function RichTextEditor() {
                 >
                     <Heading2 className="w-4 h-4" />
                     <span className="sr-only">Heading 2</span>
-                </Button>
+                </EditorButton>
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
                     onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
@@ -140,11 +141,11 @@ export default function RichTextEditor() {
                 >
                     <Heading3 className="w-4 h-4" />
                     <span className="sr-only">Heading 3</span>
-                </Button>
+                </EditorButton>
 
                 <Separator orientation="vertical" className="h-6" />
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
                     onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -152,9 +153,9 @@ export default function RichTextEditor() {
                 >
                     <List className="w-4 h-4" />
                     <span className="sr-only">Bullet List</span>
-                </Button>
+                </EditorButton>
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
                     onClick={() => editor.chain().focus().toggleOrderedList().run()}
@@ -162,9 +163,9 @@ export default function RichTextEditor() {
                 >
                     <ListOrdered className="w-4 h-4" />
                     <span className="sr-only">Ordered List</span>
-                </Button>
+                </EditorButton>
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
                     onClick={() => editor.chain().focus().toggleCodeBlock().run()}
@@ -172,9 +173,9 @@ export default function RichTextEditor() {
                 >
                     <Code className="w-4 h-4" />
                     <span className="sr-only">Code Block</span>
-                </Button>
+                </EditorButton>
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
                     onClick={() => editor.chain().focus().toggleBlockquote().run()}
@@ -182,39 +183,51 @@ export default function RichTextEditor() {
                 >
                     <Quote className="w-4 h-4" />
                     <span className="sr-only">Blockquote</span>
-                </Button>
+                </EditorButton>
 
                 <Separator orientation="vertical" className="h-6" />
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
-                    onClick={() => editor.chain().focus().setTextAlign("left").run()}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        editor.chain().focus().setTextAlign("left").run()
+                    }}
                     className={clx(editor.isActive({ textAlign: "left" }) ? "bg-ui-bg-base-pressed" : "")}
                 >
                     <AlignLeft className="w-4 h-4" />
                     <span className="sr-only">Align Left</span>
-                </Button>
+                </EditorButton>
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
-                    onClick={() => editor.chain().focus().setTextAlign("center").run()}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        editor.chain().focus().setTextAlign("center").run()
+                    }}
                     className={clx(editor.isActive({ textAlign: "center" }) ? "bg-ui-bg-base-pressed" : "")}
                 >
                     <AlignCenter className="w-4 h-4" />
                     <span className="sr-only">Align Center</span>
-                </Button>
+                </EditorButton>
 
-                <Button
+                <EditorButton
                     variant="transparent"
                     size="small"
-                    onClick={() => editor.chain().focus().setTextAlign("right").run()}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        editor.chain().focus().setTextAlign("right").run()
+                    }}
                     className={clx(editor.isActive({ textAlign: "right" }) ? "bg-ui-bg-base-pressed" : "")}
                 >
                     <AlignRight className="w-4 h-4" />
                     <span className="sr-only">Align Right</span>
-                </Button>
+                </EditorButton>
 
                 <Separator orientation="vertical" className="h-6" />
 
@@ -249,7 +262,11 @@ export default function RichTextEditor() {
                     <Button
                         variant="transparent"
                         size="small"
-                        onClick={() => editor.chain().focus().undo().run()}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            editor.chain().focus().undo().run()
+                        }}
                         disabled={!editor.can().undo()}
                     >
                         <Undo className="w-4 h-4" />
@@ -277,7 +294,11 @@ export default function RichTextEditor() {
                     <Button
                         variant="transparent"
                         size="small"
-                        onClick={() => editor.chain().focus().toggleBold().run()}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            editor.chain().focus().toggleBold().run()
+                        }}
                         data-active={editor.isActive("bold")}
                     >
                         <Bold className="w-4 h-4" />
@@ -285,7 +306,11 @@ export default function RichTextEditor() {
                     <Button
                         variant="transparent"
                         size="small"
-                        onClick={() => editor.chain().focus().toggleItalic().run()}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            editor.chain().focus().toggleItalic().run()
+                        }}
                         data-active={editor.isActive("italic")}
                     >
                         <Italic className="w-4 h-4" />
@@ -293,7 +318,11 @@ export default function RichTextEditor() {
                     <Button
                         variant="transparent"
                         size="small"
-                        onClick={() => editor.chain().focus().toggleStrike().run()}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            editor.chain().focus().toggleStrike().run()
+                        }}
                         data-active={editor.isActive("strike")}
                     >
                         <Strikethrough className="w-4 h-4" />
