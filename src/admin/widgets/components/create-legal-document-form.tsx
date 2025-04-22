@@ -78,7 +78,7 @@ export const CreateLegalDocumentForm = ({ storeInfo, isOpen, setIsOpen }: Create
                     form.reset()
                 },
                 onError: () => {
-                    toast.error("Erro ao atualizar documento")
+                    toast.error("Error updating document")
                 },
             })
         } else {
@@ -91,7 +91,7 @@ export const CreateLegalDocumentForm = ({ storeInfo, isOpen, setIsOpen }: Create
                     form.reset()
                 },
                 onError: () => {
-                    toast.error("Erro ao criar documento")
+                    toast.error("Error creating document")
                 },
             })
         }
@@ -108,9 +108,9 @@ export const CreateLegalDocumentForm = ({ storeInfo, isOpen, setIsOpen }: Create
                         <FocusModal.Body className="flex flex-col items-center py-16 overflow-y-auto max-h-[80vh]">
                             <div className="flex flex-col w-full max-w-6xl px-4 gap-y-8">
                                 <div className="flex flex-col gap-y-1">
-                                    <Heading>Documento legal</Heading>
+                                    <Heading>Legal Document</Heading>
                                     <Text className="text-ui-fg-subtle">
-                                        Adicione um documento legal para a loja
+                                        Add a legal document to the store
                                     </Text>
                                 </div>
 
@@ -121,7 +121,7 @@ export const CreateLegalDocumentForm = ({ storeInfo, isOpen, setIsOpen }: Create
                                         render={({ field }) => {
                                             return (
                                                 <div className="flex flex-col space-y-2 ">
-                                                    <Label>Nome</Label>
+                                                    <Label>Name</Label>
                                                     <Input
                                                         {...field}
                                                         placeholder="Whatsapp"
@@ -138,8 +138,8 @@ export const CreateLegalDocumentForm = ({ storeInfo, isOpen, setIsOpen }: Create
                                             return (
                                                 <div className="flex flex-col space-y-2">
                                                     <div className="flex items-center gap-x-1">
-                                                        <Label>Chave</Label>
-                                                        <Tooltip content="A chave é utilizada para identificar a informação na loja.">
+                                                        <Label>Key</Label>
+                                                        <Tooltip content="The key is used to identify the information in the store.">
                                                             <InformationCircleSolid />
                                                         </Tooltip>
                                                     </div>

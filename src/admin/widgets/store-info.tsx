@@ -14,13 +14,13 @@ import { LegalDocumentsTable } from "./components/legal-documents-table"
 const StoreInfoWidget = ({ }: DetailWidgetProps<AdminStore>) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isLegalDocumentOpen, setIsLegalDocumentOpen] = useState(false)
-    
+
     return (
         <div>
             <Container>
                 <Header
-                    title="Informações da loja"
-                    subtitle="Gerencie as informações que serão exibidas na loja"
+                    title="Store Information"
+                    subtitle="Manage the information that will be displayed in the store"
                     actions={[
                         {
                             type: "action-menu",
@@ -30,7 +30,7 @@ const StoreInfoWidget = ({ }: DetailWidgetProps<AdminStore>) => {
                                         actions: [
                                             {
                                                 icon: <Plus />,
-                                                label: "Adicionar",
+                                                label: "Add",
                                                 onClick: () => {
                                                     setIsOpen(true)
                                                 },
@@ -48,8 +48,8 @@ const StoreInfoWidget = ({ }: DetailWidgetProps<AdminStore>) => {
 
             <Container className="mt-3">
                 <Header
-                    title="Documentos legais"
-                    subtitle="Gerencie os documentos legais da loja"
+                    title="Legal Documents"
+                    subtitle="Manage the legal documents of the store"
                     actions={[
                         {
                             type: "action-menu",
@@ -59,7 +59,7 @@ const StoreInfoWidget = ({ }: DetailWidgetProps<AdminStore>) => {
                                         actions: [
                                             {
                                                 icon: <Plus />,
-                                                label: "Adicionar",
+                                                label: "Add",
                                                 onClick: () => {
                                                     setIsLegalDocumentOpen(true)
                                                 },

@@ -50,7 +50,7 @@ export const CreateStoreInfoForm = ({ isOpen, setIsOpen }: CreateStoreInfoFormPr
                 form.reset()
             },
             onError: () => {
-                toast.error("Erro ao criar informação da loja")
+                toast.error("Error creating store information")
             }
         })
     }
@@ -61,14 +61,14 @@ export const CreateStoreInfoForm = ({ isOpen, setIsOpen }: CreateStoreInfoFormPr
                 <FormProvider {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <FocusModal.Header>
-                            <Button type="submit" disabled={isPending} isLoading={isPending}>Salvar</Button>
+                            <Button type="submit" disabled={isPending} isLoading={isPending}>Save</Button>
                         </FocusModal.Header>
                         <FocusModal.Body className="flex flex-col items-center py-16 overflow-y-auto max-h-[80vh]">
                             <div className="flex flex-col w-full max-w-lg gap-y-8">
                                 <div className="flex flex-col gap-y-1">
-                                    <Heading>Informações da loja</Heading>
+                                    <Heading>Store Information</Heading>
                                     <Text className="text-ui-fg-subtle">
-                                        Adicione informações que serão exibidas na loja
+                                        Add information that will be displayed in the store
                                     </Text>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@ export const CreateStoreInfoForm = ({ isOpen, setIsOpen }: CreateStoreInfoFormPr
                                     render={({ field }) => {
                                         return (
                                             <div className="flex flex-col space-y-2">
-                                                <Label>Nome</Label>
+                                                <Label>Name</Label>
                                                 <Input
                                                     {...field}
                                                     placeholder="Whatsapp"
@@ -95,7 +95,7 @@ export const CreateStoreInfoForm = ({ isOpen, setIsOpen }: CreateStoreInfoFormPr
                                     render={({ field }) => {
                                         return (
                                             <div className="flex flex-col space-y-2">
-                                                <Label>Valor</Label>
+                                                <Label>Value</Label>
                                                 <Input
                                                     {...field}
                                                     placeholder="https://wa.me/5511999999999"
@@ -112,8 +112,8 @@ export const CreateStoreInfoForm = ({ isOpen, setIsOpen }: CreateStoreInfoFormPr
                                         return (
                                             <div className="flex flex-col space-y-2">
                                                 <div className="flex items-center gap-x-1">
-                                                    <Label>Chave</Label>
-                                                    <Tooltip content="A chave é utilizada para identificar a informação na loja.">
+                                                    <Label>Key</Label>
+                                                    <Tooltip content="The key is used to identify the information in the store.">
                                                         <InformationCircleSolid />
                                                     </Tooltip>
                                                 </div>

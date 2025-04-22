@@ -67,13 +67,10 @@ export default function RichTextEditor({ onChange, defaultValue }: RichTextEdito
         return null
     }
 
-
     const setLink = () => {
         if (linkUrl) {
-            // Check if the URL has a protocol, if not add https://
             const url = linkUrl.startsWith("http") ? linkUrl : `https://${linkUrl}`
 
-            // If text is selected, convert it to a link
             if (editor.state.selection.empty) {
                 editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run()
             } else {

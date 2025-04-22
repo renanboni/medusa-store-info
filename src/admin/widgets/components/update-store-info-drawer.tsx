@@ -64,22 +64,22 @@ export const UpdateStoreInfoDrawer = ({ storeInfo, isOpen, setIsOpen }: UpdateSt
                 <FormProvider {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col flex-1 overflow-hidden">
                         <Drawer.Header>
-                            <Heading className="capitalize">Editar Informação da Loja</Heading>
+                            <Heading className="capitalize">Edit Store Information</Heading>
                         </Drawer.Header>
 
                         <Drawer.Body className="flex flex-col flex-1 max-w-full overflow-y-auto gap-y-4">
                             <div className="flex flex-col gap-y-2">
-                                <Label>Chave</Label>
+                                <Label>Key</Label>
                                 <Controller control={form.control} name="key" render={({ field }) => <Input {...field} />} />
                             </div>
 
                             <div className="flex flex-col gap-y-2">
-                                <Label>Nome</Label>
+                                <Label>Name</Label>
                                 <Controller control={form.control} name="name" render={({ field }) => <Input {...field} />} />
                             </div>
 
                             <div className="flex flex-col gap-y-2">
-                                <Label>Valor</Label>
+                                <Label>Value</Label>
                                 <Controller control={form.control} name="value" render={({ field }) => <Input {...field} />} />
                             </div>
                         </Drawer.Body>
@@ -88,11 +88,11 @@ export const UpdateStoreInfoDrawer = ({ storeInfo, isOpen, setIsOpen }: UpdateSt
                             <div className="flex items-center justify-end gap-x-2">
                                 <Drawer.Close asChild>
                                     <Button size="small" variant="secondary">
-                                        Cancelar
+                                        Cancel
                                     </Button>
                                 </Drawer.Close>
                                 <Button isLoading={isPending} size="small" type="submit">
-                                    Salvar
+                                    Save
                                 </Button>
                             </div>
                         </Drawer.Footer>

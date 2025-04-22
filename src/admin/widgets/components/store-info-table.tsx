@@ -27,13 +27,13 @@ export const StoreInfoTable = () => {
 
     const columns = [
         columnHelper.accessor("key", {
-            header: "Chave",
+            header: "Key",
         }),
         columnHelper.accessor("name", {
-            header: "Nome",
+            header: "Name",
         }),
         columnHelper.accessor("value", {
-            header: "Valor",
+            header: "Value",
         }),
         columnHelper.display({
             id: "actions",
@@ -53,7 +53,7 @@ export const StoreInfoTable = () => {
                                     setIsOpen(true)
                                 }}>
                                     <PencilSquare className="text-ui-fg-subtle" />
-                                    Editar
+                                    Edit
                                 </DropdownMenu.Item>
                                 <DropdownMenu.Separator />
                                 <DropdownMenu.Item className="gap-x-2" onClick={(e) => {
@@ -61,7 +61,7 @@ export const StoreInfoTable = () => {
                                     deleteEntity(row.original.id);
                                 }}>
                                     <Trash className="text-ui-fg-subtle" />
-                                    Deletar
+                                    Delete
                                 </DropdownMenu.Item>
                             </DropdownMenu.Content>
                         </DropdownMenu>
@@ -79,17 +79,17 @@ export const StoreInfoTable = () => {
 
     const deleteEntity = async (id: string) => {
         const userHasConfirmed = await confirmDeleteDialog({
-            title: "Por favor, confirme",
-            description: "Você tem certeza de que deseja fazer isso?",
+            title: "Please confirm",
+            description: "Are you sure you want to delete this?",
         })
 
         if (userHasConfirmed) {
             deleteStoreInfo(id, {
                 onSuccess: () => {
-                    toast.success("Informação da loja deletada com sucesso")
+                    toast.success("Store information deleted successfully")
                 },
                 onError: (error) => {
-                    toast.error("Erro ao deletar informação da loja" + error.message)
+                    toast.error("Error deleting store information" + error.message)
                 }
             })
         }
@@ -112,7 +112,7 @@ export const StoreInfoTable = () => {
             <DataTable instance={table}>
                 {storeInfos?.filter((info) => info.type === DocumentType.TEXT).length === 0 ? (
                     <div className="flex flex-col items-center justify-center p-12 text-center">
-                        <p className="text-ui-fg-subtle">Nenhuma informação da loja encontrada</p>
+                        <p className="text-ui-fg-subtle">No store information found</p>
                     </div>
                 ) : (
                     <>

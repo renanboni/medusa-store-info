@@ -22,10 +22,10 @@ export const LegalDocumentsTable = () => {
 
     const columns = [
         columnHelper.accessor("key", {
-            header: "Chave",
+            header: "Key",
         }),
         columnHelper.accessor("name", {
-            header: "Nome",
+            header: "Name",
         }),
         columnHelper.display({
             id: "actions",
@@ -45,7 +45,7 @@ export const LegalDocumentsTable = () => {
                                     setIsOpen(true)
                                 }}>
                                     <PencilSquare className="text-ui-fg-subtle" />
-                                    Editar
+                                    Edit
                                 </DropdownMenu.Item>
                                 <DropdownMenu.Separator />
                                 <DropdownMenu.Item className="gap-x-2" onClick={(e) => {
@@ -53,7 +53,7 @@ export const LegalDocumentsTable = () => {
                                     deleteEntity(row.original.id);
                                 }}>
                                     <Trash className="text-ui-fg-subtle" />
-                                    Deletar
+                                    Delete
                                 </DropdownMenu.Item>
                             </DropdownMenu.Content>
                         </DropdownMenu>
@@ -71,17 +71,17 @@ export const LegalDocumentsTable = () => {
 
     const deleteEntity = async (id: string) => {
         const userHasConfirmed = await confirmDeleteDialog({
-            title: "Por favor, confirme",
-            description: "Você tem certeza de que deseja fazer isso?",
+            title: "Please confirm",
+            description: "Are you sure you want to delete this?",
         })
 
         if (userHasConfirmed) {
             deleteStoreInfo(id, {
                 onSuccess: () => {
-                    toast.success("Informação da loja deletada com sucesso")
+                    toast.success("Store information deleted successfully")
                 },
                 onError: (error) => {
-                    toast.error("Erro ao deletar informação da loja" + error.message)
+                    toast.error("Error deleting store information" + error.message)
                 }
             })
         }
@@ -109,7 +109,7 @@ export const LegalDocumentsTable = () => {
             <DataTable instance={table}>
                 {storeInfos?.filter((info) => info.type === DocumentType.MARKDOWN).length === 0 ? (
                     <div className="flex flex-col items-center justify-center p-12 text-center">
-                        <p className="text-ui-fg-subtle">Nenhum documento legal encontrado</p>
+                        <p className="text-ui-fg-subtle">No legal documents found</p>
                     </div>
                 ) : (
                     <>
