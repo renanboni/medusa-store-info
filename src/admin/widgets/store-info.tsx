@@ -9,6 +9,7 @@ import { useState } from "react"
 import { CreateStoreInfoForm } from "./components/create-store-info-form"
 import { StoreInfoTable } from "./components/store-info-table"
 import { CreateLegalDocumentForm } from "./components/create-legal-document-form"
+import { LegalDocumentsTable } from "./components/legal-documents-table"
 
 const StoreInfoWidget = ({ }: DetailWidgetProps<AdminStore>) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -70,6 +71,7 @@ const StoreInfoWidget = ({ }: DetailWidgetProps<AdminStore>) => {
                         },
                     ]}
                 />
+                <LegalDocumentsTable />
                 <CreateLegalDocumentForm isOpen={isLegalDocumentOpen} setIsOpen={setIsLegalDocumentOpen} />
             </Container>
         </div>
