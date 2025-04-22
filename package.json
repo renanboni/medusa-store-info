@@ -72,5 +72,14 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@tiptap/extension-link": "^2.11.7",
+    "@tiptap/extension-placeholder": "^2.11.7",
+    "@tiptap/extension-text-align": "^2.11.7",
+    "@tiptap/pm": "^2.11.7",
+    "@tiptap/react": "^2.11.7",
+    "@tiptap/starter-kit": "^2.11.7",
+    "lucide-react": "^0.503.0"
   }
 }

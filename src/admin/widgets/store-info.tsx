@@ -8,39 +8,70 @@ import { Plus } from "@medusajs/icons"
 import { useState } from "react"
 import { CreateStoreInfoForm } from "./components/create-store-info-form"
 import { StoreInfoTable } from "./components/store-info-table"
+import { CreateLegalDocumentForm } from "./components/create-legal-document-form"
 
-const StoreInfoWidget = ({}: DetailWidgetProps<AdminStore>) => {
+const StoreInfoWidget = ({ }: DetailWidgetProps<AdminStore>) => {
     const [isOpen, setIsOpen] = useState(false)
-
+    const [isLegalDocumentOpen, setIsLegalDocumentOpen] = useState(false)
     return (
-        <Container>
-            <Header
-                title="Informações da loja"
-                subtitle="Gerencie as informações que serão exibidas na loja"
-                actions={[
-                    {
-                        type: "action-menu",
-                        props: {
-                            groups: [
-                                {
-                                    actions: [
-                                        {
-                                            icon: <Plus />,
-                                            label: "Adicionar",
-                                            onClick: () => {
-                                                setIsOpen(true)
+        <div>
+            <Container>
+                <Header
+                    title="Informações da loja"
+                    subtitle="Gerencie as informações que serão exibidas na loja"
+                    actions={[
+                        {
+                            type: "action-menu",
+                            props: {
+                                groups: [
+                                    {
+                                        actions: [
+                                            {
+                                                icon: <Plus />,
+                                                label: "Adicionar",
+                                                onClick: () => {
+                                                    setIsOpen(true)
+                                                },
                                             },
-                                        },
-                                    ],
-                                },
-                            ],
+                                        ],
+                                    },
+                                ],
+                            },
                         },
-                    },
-                ]}
-            />
-            <StoreInfoTable />
-            <CreateStoreInfoForm isOpen={isOpen} setIsOpen={setIsOpen} />
-        </Container>
+                    ]}
+                />
+                <StoreInfoTable />
+                <CreateStoreInfoForm isOpen={isOpen} setIsOpen={setIsOpen} />
+            </Container>
+
+            <Container className="mt-3">
+                <Header
+                    title="Documentos legais"
+                    subtitle="Gerencie os documentos legais da loja"
+                    actions={[
+                        {
+                            type: "action-menu",
+                            props: {
+                                groups: [
+                                    {
+                                        actions: [
+                                            {
+                                                icon: <Plus />,
+                                                label: "Adicionar",
+                                                onClick: () => {
+                                                    setIsLegalDocumentOpen(true)
+                                                },
+                                            },
+                                        ],
+                                    },
+                                ],
+                            },
+                        },
+                    ]}
+                />
+                <CreateLegalDocumentForm isOpen={isLegalDocumentOpen} setIsOpen={setIsLegalDocumentOpen} />
+            </Container>
+        </div>
     )
 }
 
