@@ -13,13 +13,15 @@ export const addStoreInfoStep = createStep(
     async (input: AddStoreInfoStepInput, { container }) => {
         const storeInfoModuleService: StoreInfoService = container.resolve(STORE_INFO_MODULE)
 
-        const storeInfo = await storeInfoModuleService.createStoreInfoes(input)
+        // @ts-ignore
+        const storeInfo = await storeInfoModuleService.createStoreInfos(input)
 
         return new StepResponse(storeInfo, storeInfo.id)
     },
     async (id: string, { container }) => {
         const storeInfoModuleService: StoreInfoService = container.resolve(STORE_INFO_MODULE)
 
-        await storeInfoModuleService.deleteStoreInfoes(id)
+        // @ts-ignore
+        await storeInfoModuleService.deleteStoreInfos(id)
     }
 )

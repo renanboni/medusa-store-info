@@ -1,9 +1,10 @@
-import { Button, Heading, Input, Label, Text, Tooltip } from "@medusajs/ui"
+import { Button, Heading, Input, Label, Text, Tooltip, toast } from "@medusajs/ui"
 import { FocusModal } from "@medusajs/ui"
 import { Controller, FormProvider, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { InformationCircleSolid } from "@medusajs/icons"
+import { useCreateStoreInfo } from "../../lib/hooks/api/store-info"
 
 const schema = z.object({
     name: z.string().min(1, "Nome é obrigatório"),
@@ -26,8 +27,18 @@ export const CreateStoreInfoForm = ({ isOpen, setIsOpen }: CreateStoreInfoFormPr
         },
     })
 
+    const { createStoreInfo, isPending } = useCreateStoreInfo()
+
     const onSubmit = (data: z.infer<typeof schema>) => {
-        console.log(data)
+        createStoreInfo(data, {
+            onSuccess: () => {
+                setIsOpen(false)
+                form.reset()
+            },
+            onError: () => {
+                toast.error("Erro ao criar informação da loja")
+            }
+        })
     }
 
     return (
@@ -36,7 +47,7 @@ export const CreateStoreInfoForm = ({ isOpen, setIsOpen }: CreateStoreInfoFormPr
                 <FormProvider {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <FocusModal.Header>
-                            <Button>Salvar</Button>
+                            <Button type="submit" disabled={isPending} isLoading={isPending}>Salvar</Button>
                         </FocusModal.Header>
                         <FocusModal.Body className="flex flex-col items-center py-16 overflow-y-auto max-h-[80vh]">
                             <div className="flex flex-col w-full max-w-lg gap-y-8">
