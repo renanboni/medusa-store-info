@@ -1,11 +1,12 @@
 import { STORE_INFO_MODULE } from "../../../modules/store-info"
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
 import StoreInfoService from "../../../modules/store-info/service"
-
+import { DocumentType } from "../../../types"
 export type AddStoreInfoStepInput = {
     name: string
     value: string
-    key: string
+    key: string,
+    type: DocumentType
 }
 
 export const addStoreInfoStep = createStep(

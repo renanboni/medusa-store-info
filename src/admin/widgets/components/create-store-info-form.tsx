@@ -6,6 +6,7 @@ import { z } from "zod"
 import { InformationCircleSolid } from "@medusajs/icons"
 import { useCreateStoreInfo } from "../../lib/hooks/api/store-info"
 import { useEffect } from "react"
+
 const schema = z.object({
     name: z.string().min(1, "Nome é obrigatório"),
     value: z.string().min(1, "Valor é obrigatório"),

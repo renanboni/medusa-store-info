@@ -42,6 +42,20 @@
           "nullable": false,
           "mappedType": "text"
         },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "'text'",
+          "enumItems": [
+            "text",
+            "markdown"
+          ],
+          "mappedType": "enum"
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamptz",
@@ -78,6 +92,15 @@
       "name": "store_info",
       "schema": "public",
       "indexes": [
+        {
+          "keyName": "IDX_store_info_key_unique",
+          "columnNames": [],
+          "composite": false,
+          "constraint": false,
+          "primary": false,
+          "unique": false,
+          "expression": "CREATE UNIQUE INDEX IF NOT EXISTS \"IDX_store_info_key_unique\" ON \"store_info\" (key) WHERE deleted_at IS NULL"
+        },
         {
           "keyName": "IDX_store_info_deleted_at",
           "columnNames": [],
