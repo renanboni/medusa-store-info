@@ -72,7 +72,7 @@ const StoreInfoWidget = ({ }: DetailWidgetProps<AdminStore>) => {
                     ]}
                 />
                 <LegalDocumentsTable />
-                <CreateLegalDocumentForm isOpen={isLegalDocumentOpen} setIsOpen={setIsLegalDocumentOpen} />
+                <CreateLegalDocumentForm storeInfo={null} isOpen={isLegalDocumentOpen} setIsOpen={setIsLegalDocumentOpen} />
             </Container>
         </div>
     )

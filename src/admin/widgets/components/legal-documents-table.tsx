@@ -3,6 +3,7 @@ import { createDataTableColumnHelper, DataTable, DataTablePaginationState, Dropd
 import { EllipsisHorizontal, PencilSquare, Trash } from "@medusajs/icons"
 import { useDeleteStoreInfo, useStoreInfos } from "../../lib/hooks/api/store-info"
 import { DocumentType, StoreInfo } from "../../../types"    
+import { CreateLegalDocumentForm } from "./create-legal-document-form"
 
 const columnHelper = createDataTableColumnHelper<StoreInfo>()
 
@@ -112,6 +113,7 @@ export const LegalDocumentsTable = () => {
                 )}
                 <DataTable.Pagination />
             </DataTable>
+            <CreateLegalDocumentForm storeInfo={storeInfo} isOpen={isOpen} setIsOpen={setIsOpen} />
         </>
     )
 }
