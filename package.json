@@ -1,9 +1,12 @@
 {
-  "name": "@boni/medusa-store-info",
+  "name": "@renanboni/medusa-store-info",
   "version": "0.0.1",
-  "description": "A starter for Medusa plugins.",
-  "author": "Medusa (https://medusajs.com)",
+  "description": "A plugin for Medusa to manage store information.",
+  "author": "Renan Boni (https://github.com/renanboni)",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     ".medusa/server"
   ],

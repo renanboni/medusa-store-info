@@ -1,64 +1,59 @@
-<p align="center">
-  <a href="https://www.medusajs.com">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/59018053/229103275-b5e482bb-4601-46e6-8142-244f531cebdb.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    <img alt="Medusa logo" src="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    </picture>
-  </a>
-</p>
-<h1 align="center">
-  Medusa Plugin Starter
-</h1>
+# Medusa Store Info
 
-<h4 align="center">
-  <a href="https://docs.medusajs.com">Documentation</a> |
-  <a href="https://www.medusajs.com">Website</a>
-</h4>
+This is a plugin for Medusa to manage store information.
 
-<p align="center">
-  Building blocks for digital commerce
-</p>
-<p align="center">
-  <a href="https://github.com/medusajs/medusa/blob/master/CONTRIBUTING.md">
-    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs welcome!" />
-  </a>
-    <a href="https://www.producthunt.com/posts/medusa"><img src="https://img.shields.io/badge/Product%20Hunt-%231%20Product%20of%20the%20Day-%23DA552E" alt="Product Hunt"></a>
-  <a href="https://discord.gg/xpCwq3Kfn8">
-    <img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" alt="Discord Chat" />
-  </a>
-  <a href="https://twitter.com/intent/follow?screen_name=medusajs">
-    <img src="https://img.shields.io/twitter/follow/medusajs.svg?label=Follow%20@medusajs" alt="Follow @medusajs" />
-  </a>
-</p>
+This plugin enables you to manage store information through a flexible key-value system. You can store and retrieve various types of content including legal documents, store policies, and any other custom information that needs to be accessible throughout your Medusa store. The content can be stored as plain text or markdown format, making it versatile for different use cases.
 
-## Compatibility
+## Installation
 
-This starter is compatible with versions >= 2.4.0 of `@medusajs/medusa`. 
+Add this to your `package.json` file:
 
-## Getting Started
+```bash
+"@renanboni/medusa-store-info": "0.0.1"
+```
 
-Visit the [Quickstart Guide](https://docs.medusajs.com/learn/installation) to set up a server.
+and then run the following command to install the dependencies
 
-Visit the [Plugins documentation](https://docs.medusajs.com/learn/fundamentals/plugins) to learn more about plugins and how to create them.
+```bash
+yarn install
+```
 
-Visit the [Docs](https://docs.medusajs.com/learn/installation#get-started) to learn more about our system requirements.
+Then in your `medusa-config.ts` file, you need to add the following under the `plugins` section:
 
-## What is Medusa
+```ts
+{
+  resolve: "@renanboni/medusa-store-info",
+  options: {},
+}
+```
 
-Medusa is a set of commerce modules and tools that allow you to build rich, reliable, and performant commerce applications without reinventing core commerce logic. The modules can be customized and used to build advanced ecommerce stores, marketplaces, or any product that needs foundational commerce primitives. All modules are open-source and freely available on npm.
+## Usage
 
-Learn more about [Medusa’s architecture](https://docs.medusajs.com/learn/introduction/architecture) and [commerce modules](https://docs.medusajs.com/learn/fundamentals/modules/commerce-modules) in the Docs.
+![Alt text for your image](./public/medusa-store-info.gif)
 
-## Community & Contributions
+In your storefront, call the api to get the store information:
 
-The community and core team are available in [GitHub Discussions](https://github.com/medusajs/medusa/discussions), where you can ask for support, discuss roadmap, and share ideas.
+```ts
+const response = await fetch("/store-info")
+const data = await response.json()
+```
 
-Join our [Discord server](https://discord.com/invite/medusajs) to meet other community members.
+The response will look like this:
 
-## Other channels
-
-- [GitHub Issues](https://github.com/medusajs/medusa/issues)
-- [Twitter](https://twitter.com/medusajs)
-- [LinkedIn](https://www.linkedin.com/company/medusajs)
-- [Medusa Blog](https://medusajs.com/blog/)
+```ts
+{
+    "whatsapp_number": {
+        "id": "store_info_id_1",
+        "name": "whatsapp number",
+        "value": "http://wa.me/1234567890",
+        "key": "whatsapp_number", 
+        "type": "text"
+    },
+    "privacy_policy": {
+        "id": "store_info_id_2",
+        "name": "privacy policy",
+        "value": "Your privacy policy content here",
+        "key": "privacy_policy",
+        "type": "markdown"
+    }
+}
