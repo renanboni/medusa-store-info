@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { InformationCircleSolid } from "@medusajs/icons"
 import { useCreateStoreInfo } from "../../lib/hooks/api/store-info"
-
+import { useEffect } from "react"
 const schema = z.object({
     name: z.string().min(1, "Nome é obrigatório"),
     value: z.string().min(1, "Valor é obrigatório"),
@@ -16,6 +16,7 @@ export type CreateStoreInfoFormProps = {
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void
 }
+
 
 export const CreateStoreInfoForm = ({ isOpen, setIsOpen }: CreateStoreInfoFormProps) => {
     const form = useForm<z.infer<typeof schema>>({
@@ -28,6 +29,16 @@ export const CreateStoreInfoForm = ({ isOpen, setIsOpen }: CreateStoreInfoFormPr
     })
 
     const { createStoreInfo, isPending } = useCreateStoreInfo()
+
+    const watchedName = form.watch("name")
+
+    useEffect(() => {
+        if (watchedName) {
+            // Transform name to key format: lowercase and replace spaces with underscores
+            const keyValue = watchedName.toLowerCase().replace(/\s+/g, "_")
+            form.setValue("key", keyValue, { shouldValidate: true })
+        }
+    }, [watchedName, form])
 
     const onSubmit = (data: z.infer<typeof schema>) => {
         createStoreInfo(data, {
