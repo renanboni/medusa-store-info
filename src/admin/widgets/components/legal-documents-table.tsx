@@ -2,7 +2,7 @@ import { useMemo, useState } from "react"
 import { createDataTableColumnHelper, DataTable, DataTablePaginationState, DropdownMenu, IconButton, toast, useDataTable, usePrompt } from "@medusajs/ui"
 import { EllipsisHorizontal, PencilSquare, Trash } from "@medusajs/icons"
 import { useDeleteStoreInfo, useStoreInfos } from "../../lib/hooks/api/store-info"
-import { DocumentType, StoreInfo } from "../../../types"    
+import { DocumentType, StoreInfo } from "../../../types"
 import { CreateLegalDocumentForm } from "./create-legal-document-form"
 
 const columnHelper = createDataTableColumnHelper<StoreInfo>()
@@ -97,14 +97,19 @@ export const LegalDocumentsTable = () => {
             state: pagination,
             onPaginationChange: setPagination,
         },
+        onRowClick: (_, row) => {
+            // @ts-ignore
+            setStoreInfo(row.original)
+            setIsOpen(true)
+        }
     })
 
     return (
         <>
             <DataTable instance={table}>
-                {storeInfos?.length === 0 ? (
+                {storeInfos?.filter((info) => info.type === DocumentType.MARKDOWN).length === 0 ? (
                     <div className="flex flex-col items-center justify-center p-12 text-center">
-                        <p className="text-ui-fg-subtle">Nenhuma informação da loja encontrada</p>
+                        <p className="text-ui-fg-subtle">Nenhum documento legal encontrado</p>
                     </div>
                 ) : (
                     <>

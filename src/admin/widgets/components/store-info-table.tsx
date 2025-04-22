@@ -110,7 +110,7 @@ export const StoreInfoTable = () => {
     return (
         <>
             <DataTable instance={table}>
-                {storeInfos?.length === 0 ? (
+                {storeInfos?.filter((info) => info.type === DocumentType.TEXT).length === 0 ? (
                     <div className="flex flex-col items-center justify-center p-12 text-center">
                         <p className="text-ui-fg-subtle">Nenhuma informação da loja encontrada</p>
                     </div>
