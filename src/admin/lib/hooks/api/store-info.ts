@@ -1,6 +1,6 @@
 import { sdk } from "../../sdk"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { CreateStoreInfoRequest, StoreInfoResponse } from "../../../../types"
+import { CreateStoreInfoRequest, StoreInfo, StoreInfoResponse } from "../../../../types"
 
 export const useStoreInfos = (limit: number, offset: number, fields?: string) => {
     const { data, isLoading } = useQuery<StoreInfoResponse>({
@@ -52,4 +52,31 @@ export const useDeleteStoreInfo = () => {
     })
 
     return { deleteStoreInfo, isPending }
+}
+
+export const useUpdateStoreInfo = () => {
+    const queryClient = useQueryClient()
+    const { mutateAsync: updateStoreInfo, isPending } = useMutation({
+        mutationFn: ({ id, data }: { id: string, data: Partial<CreateStoreInfoRequest> }) => sdk.client.fetch(`/admin/store-info/${id}`, {
+            method: "PATCH",
+            body: data,
+        }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["store-info"] })
+        },
+    })
+
+    return { updateStoreInfo, isPending }
+}
+
+export const useStoreInfo = (id: string) => {
+    const { data, isLoading } = useQuery<StoreInfo>({
+        queryFn: () => sdk.client.fetch(`/admin/store-info/${id}`),
+        queryKey: ["store-info", id],
+    })
+
+    return {
+        storeInfo: data,
+        isLoading,
+    }
 }

@@ -7,6 +7,7 @@ import { useDeleteStoreInfo, useStoreInfos } from "../../lib/hooks/api/store-inf
 import { Trash } from "@medusajs/icons"
 import { PencilSquare } from "@medusajs/icons"
 import { EllipsisHorizontal } from "@medusajs/icons"
+import { UpdateStoreInfoDrawer } from "./update-store-info-drawer"
 
 const columnHelper = createDataTableColumnHelper<StoreInfo>()
 
@@ -19,6 +20,9 @@ export const StoreInfoTable = () => {
     const offset = useMemo(() => {
         return pagination.pageIndex * limit
     }, [pagination])
+
+    const [isOpen, setIsOpen] = useState(false)
+    const [storeInfo, setStoreInfo] = useState<StoreInfo | null>(null)
 
     const columns = [
         columnHelper.accessor("key", {
@@ -44,7 +48,8 @@ export const StoreInfoTable = () => {
                             </DropdownMenu.Trigger>
                             <DropdownMenu.Content align="end">
                                 <DropdownMenu.Item className="gap-x-2" onClick={() => {
-
+                                    setStoreInfo(row.original)
+                                    setIsOpen(true)
                                 }}>
                                     <PencilSquare className="text-ui-fg-subtle" />
                                     Editar
@@ -102,9 +107,21 @@ export const StoreInfoTable = () => {
     })
 
     return (
-        <DataTable instance={table}>
-            <DataTable.Table />
-            <DataTable.Pagination />
-        </DataTable>
+        <>
+            <DataTable instance={table}>
+                {storeInfos?.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center p-12 text-center">
+                        <p className="text-ui-fg-subtle">Nenhuma informação da loja encontrada</p>
+                    </div>
+                ) : (
+                    <>
+                        <DataTable.Table />
+                    </>
+                )}
+                <DataTable.Pagination />
+            </DataTable>
+
+            <UpdateStoreInfoDrawer storeInfo={storeInfo} isOpen={isOpen} setIsOpen={setIsOpen} />
+        </>
     )
 }
