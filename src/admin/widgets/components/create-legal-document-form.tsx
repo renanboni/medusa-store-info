@@ -1,4 +1,4 @@
-import { Input } from "@medusajs/ui"
+import { Input, toast } from "@medusajs/ui"
 import { InformationCircleSolid } from "@medusajs/icons"
 import { Tooltip } from "@medusajs/ui"
 import { Label } from "@medusajs/ui"
@@ -10,7 +10,9 @@ import { z } from "zod"
 import { useForm, FormProvider, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import RichTextEditor from "./rich-text-editor"
-
+import { useEffect } from "react"
+import { useCreateStoreInfo } from "../../lib/hooks/api/store-info"
+import { DocumentType } from "../../../types"
 export type CreateLegalDocumentFormProps = {
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void
@@ -19,15 +21,49 @@ export type CreateLegalDocumentFormProps = {
 const schema = z.object({
     name: z.string().min(1, "Nome é obrigatório"),
     key: z.string().min(1, "Chave é obrigatória"),
+    value: z.string().min(1, "Conteúdo é obrigatório"),
 })
 
 export const CreateLegalDocumentForm = ({ isOpen, setIsOpen }: CreateLegalDocumentFormProps) => {
+    const { createStoreInfo, isPending } = useCreateStoreInfo()
+    
     const form = useForm<z.infer<typeof schema>>({
         resolver: zodResolver(schema),
+        defaultValues: {
+            name: "",
+            key: "",
+            value: "",
+        },
     })
+    
+    const watchedName = form.watch("name")
+
+    useEffect(() => {
+        if (watchedName) {
+            const keyValue = watchedName.toLowerCase().replace(/\s+/g, "_")
+            form.setValue("key", keyValue, { shouldValidate: true })
+        }
+    }, [watchedName, form])
+
+    useEffect(() => {
+        if (!isOpen) {
+            form.reset()
+        }
+    }, [isOpen, form])
 
     const onSubmit = (data: z.infer<typeof schema>) => {
-        console.log(data)
+        createStoreInfo({
+            ...data,
+            type: DocumentType.MARKDOWN,
+        }, {
+            onSuccess: () => {
+                setIsOpen(false)
+                form.reset()
+            },
+            onError: () => {
+                toast.error("Erro ao criar documento")
+            },
+        })
     }
 
     return (
@@ -36,7 +72,7 @@ export const CreateLegalDocumentForm = ({ isOpen, setIsOpen }: CreateLegalDocume
                 <FormProvider {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <FocusModal.Header>
-                            <Button type="submit">Salvar</Button>
+                            <Button type="submit" disabled={isPending} isLoading={isPending}>Salvar</Button>
                         </FocusModal.Header>
                         <FocusModal.Body className="flex flex-col items-center py-16 overflow-y-auto max-h-[80vh]">
                             <div className="flex flex-col w-full max-w-6xl px-4 gap-y-8">
@@ -87,8 +123,23 @@ export const CreateLegalDocumentForm = ({ isOpen, setIsOpen }: CreateLegalDocume
                                 </div>
 
                                 <div className="w-full h-full">
-                                    <RichTextEditor />
+                                    <Controller
+                                        control={form.control}
+                                        name="value"
+                                        render={({ field }) => (
+                                            <RichTextEditor
+                                                onChange={(content) => field.onChange(content)}
+                                                defaultValue={field.value}
+                                            />
+                                        )}
+                                    />
                                 </div>
+
+                                {form.formState.errors.value && (
+                                    <span className="text-sm text-red-500">
+                                        {form.formState.errors.value.message}
+                                    </span>
+                                )}
                             </div>
                         </FocusModal.Body>
                     </form>

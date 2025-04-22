@@ -13,6 +13,7 @@ import { CreateLegalDocumentForm } from "./components/create-legal-document-form
 const StoreInfoWidget = ({ }: DetailWidgetProps<AdminStore>) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isLegalDocumentOpen, setIsLegalDocumentOpen] = useState(false)
+    
     return (
         <div>
             <Container>

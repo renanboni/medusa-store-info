@@ -22,4 +22,5 @@ export type CreateStoreInfoRequest = {
     name: string
     value: string
     key: string
+    type: DocumentType
 }

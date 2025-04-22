@@ -6,7 +6,7 @@ import { z } from "zod"
 import { InformationCircleSolid } from "@medusajs/icons"
 import { useCreateStoreInfo } from "../../lib/hooks/api/store-info"
 import { useEffect } from "react"
-
+import { DocumentType } from "../../../types"
 const schema = z.object({
     name: z.string().min(1, "Nome é obrigatório"),
     value: z.string().min(1, "Valor é obrigatório"),
@@ -41,7 +41,10 @@ export const CreateStoreInfoForm = ({ isOpen, setIsOpen }: CreateStoreInfoFormPr
     }, [watchedName, form])
 
     const onSubmit = (data: z.infer<typeof schema>) => {
-        createStoreInfo(data, {
+        createStoreInfo({
+            ...data,
+            type: DocumentType.TEXT,
+        }, {
             onSuccess: () => {
                 setIsOpen(false)
                 form.reset()

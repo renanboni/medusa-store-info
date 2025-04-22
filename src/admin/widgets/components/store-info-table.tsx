@@ -8,6 +8,7 @@ import { Trash } from "@medusajs/icons"
 import { PencilSquare } from "@medusajs/icons"
 import { EllipsisHorizontal } from "@medusajs/icons"
 import { UpdateStoreInfoDrawer } from "./update-store-info-drawer"
+import { DocumentType } from "../../../types"
 
 const columnHelper = createDataTableColumnHelper<StoreInfo>()
 
@@ -96,9 +97,9 @@ export const StoreInfoTable = () => {
 
     const table = useDataTable({
         columns,
-        data: storeInfos || [],
+        data: storeInfos?.filter((info) => info.type === DocumentType.TEXT) || [],
         getRowId: (row) => row.id,
-        rowCount: storeInfos?.length || 0,
+        rowCount: storeInfos?.filter((info) => info.type === DocumentType.TEXT).length || 0,
         isLoading,
         pagination: {
             state: pagination,

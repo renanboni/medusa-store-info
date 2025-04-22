@@ -19,7 +19,7 @@ export default defineMiddlewares({
                 validateAndTransformQuery(
                     GetStoreInfoSchema,
                     {
-                        defaults: ["id", "name", "value", "key"],
+                        defaults: ["id", "name", "value", "key", "type"],
                         isList: true,
                     }
                 ),

@@ -28,7 +28,12 @@ import { Button, clx, Input, Label, Popover } from "@medusajs/ui"
 import { Separator } from "../../components/separator"
 import EditorButton from "./editor-button"
 
-export default function RichTextEditor() {
+interface RichTextEditorProps {
+    onChange: (content: string) => void
+    defaultValue?: string
+}
+
+export default function RichTextEditor({ onChange, defaultValue }: RichTextEditorProps) {
     const [linkUrl, setLinkUrl] = useState("")
 
     const editor = useEditor({
@@ -47,11 +52,14 @@ export default function RichTextEditor() {
                 types: ["heading", "paragraph"],
             }),
         ],
-        content: "<p>Hello, this is a rich text editor built with Tiptap!</p>",
+        content: defaultValue,
         editorProps: {
             attributes: {
                 class: "prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl focus:outline-none max-w-none",
             },
+        },
+        onUpdate: ({ editor }) => {
+            onChange(editor.getHTML())
         },
     })
 
