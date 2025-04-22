@@ -25,5 +25,9 @@ export default defineMiddlewares({
                 ),
             ],
         },
+        {
+            matcher: "/admin/store-info/:id",
+            method: "DELETE"
+        },
     ],
 })

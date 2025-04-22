@@ -37,3 +37,19 @@ export const useCreateStoreInfo = () => {
         isPending,
     }
 }
+
+export const useDeleteStoreInfo = () => {
+    const queryClient = useQueryClient()
+    const { mutateAsync: deleteStoreInfo, isPending } = useMutation({
+        mutationFn: async (id: string) => {
+            await sdk.client.fetch(`/admin/store-info/${id}`, {
+                method: "DELETE",
+            })
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["store-info"] })
+        },
+    })
+
+    return { deleteStoreInfo, isPending }
+}
