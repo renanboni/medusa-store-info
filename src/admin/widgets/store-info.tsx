@@ -7,7 +7,7 @@ import { Container } from "../components/container"
 import { Plus } from "@medusajs/icons"
 import { useState } from "react"
 import { CreateStoreInfoForm } from "./components/create-store-info-form"
-
+import { StoreInfoTable } from "./components/store-info-table"
 const StoreInfoWidget = ({
     data: store,
 }: DetailWidgetProps<AdminStore>) => {
@@ -39,6 +39,7 @@ const StoreInfoWidget = ({
                     },
                 ]}
             />
+            <StoreInfoTable />
             <CreateStoreInfoForm isOpen={isOpen} setIsOpen={setIsOpen} />
         </Container>
     )
