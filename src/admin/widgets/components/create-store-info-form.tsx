@@ -34,7 +34,6 @@ export const CreateStoreInfoForm = ({ isOpen, setIsOpen }: CreateStoreInfoFormPr
 
     useEffect(() => {
         if (watchedName) {
-            // Transform name to key format: lowercase and replace spaces with underscores
             const keyValue = watchedName.toLowerCase().replace(/\s+/g, "_")
             form.setValue("key", keyValue, { shouldValidate: true })
         }
